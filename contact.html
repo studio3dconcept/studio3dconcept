@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<label>Ne pas remplir <input name="website"></label>
-</p>
+<main class="container">
+<h1>Contact / Devis</h1>
+
+
+<form name="contact" action="success.html" method="POST" data-netlify="true" netlify-honeypot="website" id="contactForm" class="card">
+<input type="hidden" name="form-name" value="contact">
+<p class="hp"><label>Ne pas remplir <input name="website"></label></p>
 
 
 <label>Nom*</label>
@@ -24,35 +29,31 @@
 
 
 <label>Photos (upload externe)</label>
-<button type="button" id="btnUpload">Choisir des fichiers</button>
-<div class="hint">Les fichiers sont stockés chez Bytescale (jusqu'à 500 Mo par fichier selon plan). Les liens seront joints à votre message.</div>
-<div id="uploads"></div>
+<button type="button" id="btnUpload" class="btn">Choisir des fichiers</button>
+<p class="hint">Les fichiers sont stockés chez Bytescale. Les liens seront joints à votre message.</p>
+<div id="uploads" class="chips"></div>
 
 
-<!-- Les URLs des fichiers (envoyées à Netlify Forms) -->
 <input type="hidden" name="file_urls" id="file_urls">
 
 
-<button type="submit">Envoyer</button>
+<button type="submit" class="btn">Envoyer</button>
 </form>
-</div>
+</main>
+
+
+<footer class="container foot">© Studio 3D Concept</footer>
 
 
 <script>
-// ====== CONFIG BYTESCALE ======
 const apiKey = "public_kW2K8bQDj6TDrDE2FvM57zrdxNh2"; // ta clé publique
-
-
-// Options du widget
 const widgetOptions = {
 apiKey,
 maxFileCount: 10,
-maxFileSizeBytes: 500 * 1024 * 1024, // 500 Mo (ajuste selon ton plan Bytescale)
+maxFileSizeBytes: 500 * 1024 * 1024,
 multi: true,
 mimeTypes: ["image/*"],
-path: {
-folderPath: "/studio3d/uploads/${new Date().getFullYear()}/${String(new Date().getMonth()+1).padStart(2,'0')}/"
-}
+path: { folderPath: "/studio3d/uploads/${new Date().getFullYear()}/${String(new Date().getMonth()+1).padStart(2,'0')}/" }
 };
 
 
@@ -68,18 +69,15 @@ const result = await BytescaleUploadWidget.open(widgetOptions);
 if (result && result.files) {
 result.files.forEach(f => {
 fileURLs.push(f.fileUrl);
-const link = document.createElement('a');
-link.href = f.fileUrl;
-link.target = "_blank";
-link.rel = "noopener";
-link.textContent = f.originalFileName || 'fichier';
-uploadsDiv.appendChild(link);
+const a = document.createElement('a');
+a.href = f.fileUrl; a.target = '_blank'; a.rel = 'noopener';
+a.textContent = f.originalFileName || 'fichier';
+a.className = 'chip';
+uploadsDiv.appendChild(a);
 });
 hidden.value = fileURLs.join('\n');
 }
-} catch (e) {
-alert('Erreur upload : ' + e);
-}
+} catch (e) { alert('Erreur upload : ' + e); }
 });
 </script>
 </body>
