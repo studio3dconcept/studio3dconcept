@@ -1,185 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Studio 3D Concept | Modélisation & Impression 3D sur mesure en Haute-Loire</title>
-
-  <!-- SEO de base -->
-  <meta name="description" content="Studio 3D Concept à Mazet-Saint-Voy (43) : modélisation et impression 3D sur mesure. Du prototype à la petite série, rendu propre, précis et rapide. Devis gratuit." />
-  <meta name="keywords" content="impression 3D, modélisation 3D, prototype, Haute-Loire, Studio 3D Concept, pièce sur mesure, prototypage, réparation, petite série, Mazet-Saint-Voy" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="Studio 3D Concept" />
-
-  <!-- Open Graph / partage -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Studio 3D Concept | Du concept à la réalité, en 3D" />
-  <meta property="og:description" content="Modélisation & Impression 3D sur mesure — prototypes, adaptations, réparations et petites séries." />
-  <meta property="og:url" content="https://studio3dconcept.fr" />
-  <meta property="og:image" content="https://studio3dconcept.fr/assets/img/logo-Picsart-BackgroundRemover.png" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/logo-Picsart-BackgroundRemover.png" />
-
-  <!-- Google Search Console -->
-  <meta name="google-site-verification" content="google74eea934f2aa5e06" />
-
-  <!-- Google Analytics (GA4) -->
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MCQ4XC82R2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MCQ4XC82R2');
-  </script>
-
-  <!-- Données structurées (référencement local) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Studio 3D Concept",
-    "image": "https://studio3dconcept.fr/assets/img/logo-Picsart-BackgroundRemover.png",
-    "url": "https://studio3dconcept.fr",
-    "telephone": "+33781184947",
-    "email": "contact@studio3dconcept.fr",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "19 montée de Roudon",
-      "postalCode": "43520",
-      "addressLocality": "Mazet-Saint-Voy",
-      "addressCountry": "FR"
-    },
-    "description": "Modélisation et impression 3D sur mesure : prototypes, ajustements, réparations et petites séries."
-  }
-  </script>
-
-  <!-- CSS global -->
-  <link rel="stylesheet" href="assets/css/app.css" />
-
-  <!-- Styles page -->
-  <style>
-    .hero-logo{width:160px;height:auto;margin-bottom:20px;filter:drop-shadow(0 0 15px rgba(17,197,255,.3))}
-    .intro-text{max-width:780px;margin:14px auto;color:#9fb1cc;font-size:17px;line-height:1.7}
-    .cta-btn{display:inline-block;margin-top:20px;padding:14px 28px;border-radius:14px;
-      background:linear-gradient(90deg,#11c5ff,#8a46ff);color:#001122;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
-      box-shadow:0 0 20px rgba(17,197,255,.25);transition:transform .2s,opacity .2s}
-    .cta-btn:hover{transform:translateY(-2px);opacity:.9}
-    .carousel{width:100%;height:420px;border-radius:20px;overflow:hidden;position:relative;border:1px solid #1f2b45;margin:40px auto}
-    .carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease-in-out}
-    .carousel img.active{opacity:1}
-    @media (max-width:700px){.carousel{height:300px}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Studio 3D Concept – Modélisation & Impression 3D</title>
+<!-- IMPORTANT pour GitHub Pages -->
+<base href="/studio3dconcept/">
+<link rel="stylesheet" href="app.css" />
+<script defer src="main.js"></script>
 </head>
-
 <body>
-  <!-- HEADER -->
-  <header class="hdr">
-    <div class="container topbar">
-      <img src="assets/img/logo-Picsart-BackgroundRemover.png" alt="Studio 3D Concept" class="logo" />
-      <div>
-        <div class="brand">STUDIO 3D CONCEPT</div>
-        <div class="tag">Du concept à la réalité, en 3D</div>
-      </div>
-    </div>
-    <nav class="container nav">
-      <a href="./index.html" aria-current="page">Accueil</a>
-      <a href="./services.html">Services</a>
-      <a href="./realisations.html">Réalisations</a>
-      <a href="./contact.html">Devis & Contact</a>
-    </nav>
-  </header>
+<header class="container">
+<img src="logo1.jpg" alt="Logo Studio 3D Concept" class="logo" />
+<nav class="nav">
+<a href="index.html">Accueil</a>
+<a href="services.html">Services</a>
+<a href="realisations.html">Réalisations</a>
+<a href="contact.html">Devis & Contact</a>
+</nav>
+</header>
 
-  <!-- CONTENU -->
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero" style="text-align:center">
-      <img src="assets/img/logo-Picsart-BackgroundRemover.png" alt="Logo Studio 3D Concept" class="hero-logo" />
-      <h1>Modélisation & Impression 3D sur mesure</h1>
-      <p class="intro-text">
-        Studio 3D Concept conçoit et fabrique vos pièces sur mesure : prototypage, adaptation,
-        petites séries et réparations techniques. Rendu propre, précis et durable, avec un suivi
-        réactif du besoin jusqu’à la pièce finale.
-      </p>
-      <p class="intro-text">
-        Besoin pro ou perso ? On s’occupe de la modélisation, des ajustements et de l’impression
-        (PLA, ASA, PA, TPU…), pour des résultats fiables et propres, dans des délais courts.
-      </p>
-      <a href="./contact.html" class="cta-btn">Demander un devis gratuit</a>
-    </section>
 
-    <!-- CARROUSEL -->
-    <section>
-      <div class="carousel" id="carousel">
-        <img src="assets/img/logo1.jpg" alt="Pièce 3D 1" class="active" />
-        <img src="assets/img/gallery2.jpg" alt="Pièce 3D 2" />
-        <img src="assets/img/gallery3.jpg" alt="Pièce 3D 3" />
-        <img src="assets/img/gallery4.jpg" alt="Pièce 3D 4" />
-      </div>
-    </section>
+<main class="container">
+<h1>Modélisation & Impression 3D sur mesure</h1>
+<p>Prototypage, adaptation, petites séries, pièces techniques. PLA, ASA, PA, TPU…</p>
+<p><a class="btn" href="contact.html">DEMANDER UN DEVIS GRATUIT</a></p>
 
-    <!-- VALEURS -->
-    <section>
-      <div class="card">
-        <h3>Pourquoi nous choisir ?</h3>
-        <div class="grid-3">
-          <div class="pill"><h4>⚡ Rapidité</h4><p class="lead">Devis en 24h, exécution rapide, suivi clair.</p></div>
-          <div class="pill"><h4>🎯 Précision</h4><p class="lead">Calibrations, contrôles visuels et dimensionnels.</p></div>
-          <div class="pill"><h4>🤝 Proximité</h4><p class="lead">Un contact unique, réactif, à l’écoute.</p></div>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="foot">
-    <div class="container">
-      © <span id="year"></span> Studio 3D Concept — 19 montée de Roudon, 43520 Mazet-Saint-Voy — SIRET 794 884 593 00029
-      <div class="contacts">
-        <a href="mailto:contact@studio3dconcept.fr">contact@studio3dconcept.fr</a>
-        <a href="mailto:devis@studio3dconcept.fr">devis@studio3dconcept.fr</a>
-        <a href="tel:+33781184947">07 81 18 49 47</a>
-      </div>
-    </div>
-  </footer>
+<section class="card">
+<h2>Pourquoi nous choisir ?</h2>
+<ul>
+<li>Réactivité & suivi</li>
+<li>Finitions propres</li>
+<li>Matériaux techniques</li>
+</ul>
+</section>
+</main>
 
-  <!-- JS global (si tu as un app.css/app.js) -->
-  <script src="assets/js/main.js"></script>
 
-  <!-- JS page : année + carrousel robuste -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-
-      const box = document.getElementById('carousel');
-      if (!box) return;
-
-      const nodes = [...box.querySelectorAll('img')];
-      if (!nodes.length) return;
-
-      const ok = [];
-      let left = nodes.length;
-
-      function start() {
-        if (!ok.length) return;
-        ok.forEach((img, i) => img.classList.toggle('active', i === 0));
-        let i = 0;
-        setInterval(() => {
-          ok[i].classList.remove('active');
-          i = (i + 1) % ok.length;
-          ok[i].classList.add('active');
-        }, 5000);
-      }
-
-      nodes.forEach(img => {
-        const t = new Image();
-        t.onload  = () => { ok.push(img); if (--left === 0) start(); };
-        t.onerror = () => { img.remove();  if (--left === 0) start(); };
-        t.src = img.src;
-      });
-    });
-  </script>
+<footer class="container foot">
+© Studio 3D Concept
+</footer>
 </body>
 </html>
