@@ -1,88 +1,269 @@
-<script src="https://js.bytescale.com/upload-widget/v5"></script>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demande de devis – Studio 3D Concept</title>
 
-<!DOCTYPE html>
-<label>Ne pas remplir <input name="website"></label>
-</p>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#0f1422;
+      --text:#e6e9f3;
+      --muted:#9aa3b2;
+      --primary:#0f60ff;
+      --grad1:#3aa6ff;
+      --grad2:#7a5cff;
+      --stroke:#1f2740;
+    }
 
+    body{
+      font-family:system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(1200px 600px at 50% -200px, rgba(122,92,255,.15), transparent 60%),
+        radial-gradient(900px 500px at 10% 110%, rgba(58,166,255,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:60px 20px;
+    }
 
-<label>Nom*</label>
-<input name="name" required maxlength="120" autocomplete="name">
+    .wrap{
+      width:100%;
+      max-width:780px;
+      background:linear-gradient(180deg, rgba(22,28,46,.9), rgba(15,20,34,.9));
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:36px 30px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+      animation:fadeIn .6s ease;
+    }
 
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(10px);}
+      to{opacity:1; transform:translateY(0);}
+    }
 
-<div class="row">
-<div>
-<label>Email*</label>
-<input name="email" type="email" required maxlength="180" autocomplete="email">
-</div>
-<div>
-<label>Téléphone</label>
-<input name="phone" type="tel" maxlength="40" autocomplete="tel">
-</div>
-</div>
+    h1{
+      margin:0 0 10px;
+      font-size:28px;
+      text-align:center;
+      background:linear-gradient(90deg,var(--grad1),var(--grad2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
 
+    form{display:grid;gap:16px;margin-top:20px}
+    label{font-weight:600;margin-bottom:6px;color:#cfd6e6}
 
-<label>Message*</label>
-<textarea name="message" rows="6" required maxlength="5000"></textarea>
+    input,textarea{
+      width:100%;
+      box-sizing:border-box;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--stroke);
+      outline:none;
+      background:#0c1120;
+      color:var(--text);
+    }
 
+    input::placeholder,textarea::placeholder{color:#75809a}
+    textarea{min-height:120px;resize:vertical}
 
-<label>Photos (upload externe)</label>
-<button type="button" id="btnUpload">Choisir des fichiers</button>
-<div class="hint">Les fichiers sont stockés chez Bytescale (jusqu'à 500 Mo par fichier selon plan). Les liens seront joints à votre message.</div>
-<div id="uploads"></div>
+    .files{
+      padding:12px;
+      border-radius:12px;
+      border:1px dashed #2a355a;
+      background:#0c1120;
+    }
 
+    .file-links a{
+      display:inline-block;
+      margin:6px 6px 0 0;
+      padding:6px 10px;
+      border-radius:8px;
+      border:1px solid #2a355a;
+      text-decoration:none;
+      color:#b7c3ff;
+      background:#0f1424;
+    }
 
-<!-- Les URLs des fichiers (envoyées à Netlify Forms) -->
-<input type="hidden" name="file_urls" id="file_urls">
+    .btn{
+      cursor:pointer;
+      border:none;
+      font-weight:700;
+      border-radius:12px;
+      padding:12px;
+      font-size:16px;
+      background:linear-gradient(90deg,var(--grad1),var(--grad2));
+      color:white;
+      box-shadow:0 8px 24px rgba(122,92,255,.35);
+      transition:transform .06s ease, filter .2s ease;
+    }
 
+    .btn:hover{filter:brightness(1.08)}
+    .btn:active{transform:translateY(1px)}
 
-<button type="submit">Envoyer</button>
-</form>
-</div>
+    .ok,.err{
+      display:none;
+      margin-top:12px;
+      padding:12px;
+      border-radius:10px;
+      text-align:center;
+      font-weight:500;
+      border:1px solid;
+    }
 
+    .ok{
+      background:rgba(24,160,88,.1);
+      color:#7bffb2;
+      border-color:rgba(24,160,88,.35);
+    }
 
-<script>
-// ====== CONFIG BYTESCALE ======
-const apiKey = "public_kW2K8bQDj6TDrDE2FvM57zrdxNh2"; // ta clé publique
+    .err{
+      background:rgba(220,76,70,.08);
+      color:#ffb3ad;
+      border-color:rgba(220,76,70,.35);
+    }
 
+    .logo{
+      display:block;
+      width:100px;
+      margin:0 auto 10px;
+      filter:drop-shadow(0 0 6px rgba(122,92,255,.5));
+    }
+  </style>
 
-// Options du widget
-const widgetOptions = {
-apiKey,
-maxFileCount: 10,
-maxFileSizeBytes: 500 * 1024 * 1024, // 500 Mo (ajuste selon ton plan Bytescale)
-multi: true,
-mimeTypes: ["image/*"],
-path: {
-folderPath: "/studio3d/uploads/${new Date().getFullYear()}/${String(new Date().getMonth()+1).padStart(2,'0')}/"
-}
-};
+  <!-- Bytescale -->
+  <script src="https://js.bytescale.com/upload-widget/v4"></script>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    const BYTESCALE_PUBLIC_API_KEY = "public_kW2K8bQDj6TDrDE2FvM57zrdxNh2";
+    const EMAILJS_PUBLIC_KEY  = "bxu_LnkAPSP5X76Xh";
+    const EMAILJS_SERVICE_ID  = "service_studio3dconcept";
+    const EMAILJS_TEMPLATE_ID = "template_q6nnwi8";
+    document.addEventListener("DOMContentLoaded", () => emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }));
+  </script>
+</head>
 
+<body>
+  <div class="wrap">
+    <img src="logo.png" alt="Studio 3D Concept" class="logo" />  <!-- ton logo -->
+    <h1>Demande de devis</h1>
 
-const btn = document.getElementById('btnUpload');
-const uploadsDiv = document.getElementById('uploads');
-const hidden = document.getElementById('file_urls');
-let fileURLs = [];
+    <div id="ok" class="ok">✅ Votre message a bien été envoyé. Merci !</div>
+    <div id="err" class="err">❌ Une erreur est survenue. Merci de réessayer.</div>
 
+    <form id="form">
+      <div>
+        <label>Nom et prénom</label>
+        <input name="name" type="text" placeholder="Votre nom" required />
+      </div>
 
-btn.addEventListener('click', async () => {
-try {
-const result = await BytescaleUploadWidget.open(widgetOptions);
-if (result && result.files) {
-result.files.forEach(f => {
-fileURLs.push(f.fileUrl);
-const link = document.createElement('a');
-link.href = f.fileUrl;
-link.target = "_blank";
-link.rel = "noopener";
-link.textContent = f.originalFileName || 'fichier';
-uploadsDiv.appendChild(link);
-});
-hidden.value = fileURLs.join('\n');
-}
-} catch (e) {
-alert('Erreur upload : ' + e);
-}
-});
-</script>
+      <div>
+        <label>Email</label>
+        <input name="email" type="email" placeholder="vous@exemple.fr" required />
+      </div>
+
+      <div>
+        <label>Téléphone (optionnel)</label>
+        <input name="phone" type="tel" placeholder="06..." />
+      </div>
+
+      <div>
+        <label>Message</label>
+        <textarea name="message" placeholder="Décrivez votre besoin..." required></textarea>
+      </div>
+
+      <div class="files">
+        <label>Fichiers (PDF, STL, ZIP, images...)</label><br />
+        <button type="button" id="btnUpload" class="btn" style="width:auto;">Ajouter des fichiers</button>
+        <div id="links" class="file-links"></div>
+      </div>
+
+      <button type="submit" class="btn">Envoyer</button>
+    </form>
+  </div>
+
+  <script>
+    // ===== Bytescale upload =====
+    const uploader = window.UploadWidget;
+    const btn = document.getElementById("btnUpload");
+    const linksDiv = document.getElementById("links");
+    const uploaded = [];
+
+    const uploadOpts = {
+      apiKey: BYTESCALE_PUBLIC_API_KEY,
+      maxFileCount: 10,
+      maxFileSizeBytes: 300 * 1024 * 1024,
+      mimeTypes: [
+        "application/pdf",
+        "application/zip",
+        "model/stl",
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+      ],
+      editor: { images: false }
+    };
+
+    btn.addEventListener("click", async () => {
+      try {
+        const { files } = await uploader.open(uploadOpts);
+        if (!files) return;
+        files.forEach(f => {
+          uploaded.push({ url: f.fileUrl, name: f.originalFileName });
+          const a = document.createElement("a");
+          a.href = f.fileUrl;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = f.originalFileName || "fichier";
+          linksDiv.appendChild(a);
+        });
+      } catch (e) {
+        alert("Erreur upload : " + (e?.message || e));
+      }
+    });
+
+    // ===== EmailJS send =====
+    const form = document.getElementById("form");
+    const ok = document.getElementById("ok");
+    const err = document.getElementById("err");
+
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      ok.style.display = "none";
+      err.style.display = "none";
+
+      const data = new FormData(form);
+      const params = {
+        name: data.get("name"),
+        email: data.get("email"),
+        phone: data.get("phone") || "",
+        message: data.get("message"),
+        file_urls: uploaded.map(f => f.url).join("\n"),
+        to_email: "devis@studio3dconcept.fr"
+      };
+
+      try {
+        const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+        if (res.status === 200) {
+          ok.style.display = "block";
+          form.reset();
+          uploaded.length = 0;
+          linksDiv.innerHTML = "";
+        } else throw new Error(res.status);
+      } catch (e) {
+        err.style.display = "block";
+        console.error(e);
+      }
+    });
+  </script>
 </body>
 </html>
