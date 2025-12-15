@@ -16,16 +16,15 @@
   <meta property="og:title" content="Studio 3D Concept | Du concept à la réalité, en 3D" />
   <meta property="og:description" content="Modélisation & Impression 3D sur mesure — prototypes, adaptations, réparations et petites séries." />
   <meta property="og:url" content="https://studio3dconcept.fr" />
-  <meta property="og:image" content="https://studio3dconcept.fr/assets/img/logo-Picsart-BackgroundRemover.png" />
+  <meta property="og:image" content="https://studio3dconcept.fr/assets/img/logo.png" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/logo-Picsart-BackgroundRemover.png" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
 
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="google74eea934f2aa5e06" />
 
   <!-- Google Analytics (GA4) -->
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MCQ4XC82R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -34,13 +33,13 @@
     gtag('config', 'G-MCQ4XC82R2');
   </script>
 
-  <!-- Données structurées (référencement local) -->
+  <!-- Données structurées -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Studio 3D Concept",
-    "image": "https://studio3dconcept.fr/assets/img/logo-Picsart-BackgroundRemover.png",
+    "image": "https://studio3dconcept.fr/assets/img/logo.png",
     "url": "https://studio3dconcept.fr",
     "telephone": "+33781184947",
     "email": "contact@studio3dconcept.fr",
@@ -60,7 +59,15 @@
 
   <!-- Styles page -->
   <style>
-    .hero-logo{width:160px;height:auto;margin-bottom:20px;filter:drop-shadow(0 0 15px rgba(17,197,255,.3))}
+    /* ✅ flou / halo supprimés ici */
+    .hero-logo {
+      width:160px;
+      height:auto;
+      margin-bottom:20px;
+      filter:none !important;
+      box-shadow:none !important;
+    }
+
     .intro-text{max-width:780px;margin:14px auto;color:#9fb1cc;font-size:17px;line-height:1.7}
     .cta-btn{display:inline-block;margin-top:20px;padding:14px 28px;border-radius:14px;
       background:linear-gradient(90deg,#11c5ff,#8a46ff);color:#001122;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
@@ -77,7 +84,7 @@
   <!-- HEADER -->
   <header class="hdr">
     <div class="container topbar">
-      <img src="assets/img/logo-Picsart-BackgroundRemover.png" alt="Studio 3D Concept" class="logo" />
+      <img src="/assets/img/logo.png" alt="Studio 3D Concept" class="logo" />
       <div>
         <div class="brand">STUDIO 3D CONCEPT</div>
         <div class="tag">Du concept à la réalité, en 3D</div>
@@ -93,9 +100,8 @@
 
   <!-- CONTENU -->
   <main class="container">
-    <!-- HERO -->
     <section class="hero" style="text-align:center">
-      <img src="assets/img/logo-Picsart-BackgroundRemover.png" alt="Logo Studio 3D Concept" class="hero-logo" />
+      <img src="/assets/img/logo.png" alt="Logo Studio 3D Concept" class="hero-logo" />
       <h1>Modélisation & Impression 3D sur mesure</h1>
       <p class="intro-text">
         Studio 3D Concept conçoit et fabrique vos pièces sur mesure : prototypage, adaptation,
@@ -109,7 +115,6 @@
       <a href="./contact.html" class="cta-btn">Demander un devis gratuit</a>
     </section>
 
-    <!-- CARROUSEL -->
     <section>
       <div class="carousel" id="carousel">
         <img src="assets/img/logo1.jpg" alt="Pièce 3D 1" class="active" />
@@ -119,7 +124,6 @@
       </div>
     </section>
 
-    <!-- VALEURS -->
     <section>
       <div class="card">
         <h3>Pourquoi nous choisir ?</h3>
@@ -132,36 +136,29 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="foot">
     <div class="container">
       © <span id="year"></span> Studio 3D Concept — 19 montée de Roudon, 43520 Mazet-Saint-Voy — SIRET 794 884 593 00029
       <div class="contacts">
-        <a href="mailto:contact@studio3dconcept.fr">contact@studio3dconcept.fr</a>
-        <a href="mailto:devis@studio3dconcept.fr">devis@studio3dconcept.fr</a>
-        <a href="tel:+33781184947">07 81 18 49 47</a>
-      </div>
+  <a href="mailto:contact@studio3dconcept.fr">contact@studio3dconcept.fr</a>
+  <a href="mailto:devis@studio3dconcept.fr">devis@studio3dconcept.fr</a>
+  <a href="tel:+33781184947">07 81 18 49 47</a>
+  <a href="mentions-legales.html">Mentions légales</a>
+</div>
     </div>
   </footer>
 
-  <!-- JS global (si tu as un app.css/app.js) -->
   <script src="assets/js/main.js"></script>
-
-  <!-- JS page : année + carrousel robuste -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const y = document.getElementById('year');
       if (y) y.textContent = new Date().getFullYear();
-
       const box = document.getElementById('carousel');
       if (!box) return;
-
       const nodes = [...box.querySelectorAll('img')];
       if (!nodes.length) return;
-
       const ok = [];
       let left = nodes.length;
-
       function start() {
         if (!ok.length) return;
         ok.forEach((img, i) => img.classList.toggle('active', i === 0));
@@ -172,7 +169,6 @@
           ok[i].classList.add('active');
         }, 5000);
       }
-
       nodes.forEach(img => {
         const t = new Image();
         t.onload  = () => { ok.push(img); if (--left === 0) start(); };
