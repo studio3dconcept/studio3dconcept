@@ -4,264 +4,142 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Demande de devis – Studio 3D Concept</title>
-
   <style>
-    :root{
-      --bg:#0b0f17;
-      --panel:#0f1422;
-      --text:#e6e9f3;
-      --muted:#9aa3b2;
-      --primary:#0f60ff;
-      --grad1:#3aa6ff;
-      --grad2:#7a5cff;
-      --stroke:#1f2740;
-    }
-
+    :root{--bg:#0b0f17;--panel:#0f1422;--text:#e6e9f3;--muted:#9aa3b2;--grad1:#3aa6ff;--grad2:#7a5cff;--stroke:#1f2740}
     body{
-      font-family:system-ui, Segoe UI, Roboto, Arial, sans-serif;
-      margin:0;
-      min-height:100vh;
+      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;margin:0;min-height:100vh;
       background:
         radial-gradient(1200px 600px at 50% -200px, rgba(122,92,255,.15), transparent 60%),
-        radial-gradient(900px 500px at 10% 110%, rgba(58,166,255,.12), transparent 60%),
-        var(--bg);
-      color:var(--text);
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      padding:60px 20px;
+        radial-gradient(900px 500px at 10% 110%, rgba(58,166,255,.12), transparent 60%),var(--bg);
+      color:var(--text);display:flex;justify-content:center;align-items:flex-start;padding:60px 20px;
     }
-
     .wrap{
-      width:100%;
-      max-width:780px;
-      background:linear-gradient(180deg, rgba(22,28,46,.9), rgba(15,20,34,.9));
-      border:1px solid var(--stroke);
-      border-radius:16px;
-      padding:36px 30px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
-      animation:fadeIn .6s ease;
+      width:100%;max-width:780px;background:linear-gradient(180deg, rgba(22,28,46,.9), rgba(15,20,34,.9));
+      border:1px solid var(--stroke);border-radius:16px;padding:36px 30px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03)
     }
-
-    @keyframes fadeIn{
-      from{opacity:0; transform:translateY(10px);}
-      to{opacity:1; transform:translateY(0);}
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size:28px;
-      text-align:center;
-      background:linear-gradient(90deg,var(--grad1),var(--grad2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
+    .logo{display:block;width:120px;margin:0 auto 10px;filter:none}
+    h1{margin:0 0 10px;font-size:28px;text-align:center;background:linear-gradient(90deg,var(--grad1),var(--grad2));-webkit-background-clip:text;background-clip:text;color:transparent}
     form{display:grid;gap:16px;margin-top:20px}
     label{font-weight:600;margin-bottom:6px;color:#cfd6e6}
-
     input,textarea{
-      width:100%;
-      box-sizing:border-box;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--stroke);
-      outline:none;
-      background:#0c1120;
-      color:var(--text);
+      width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid var(--stroke);
+      outline:none;background:#0c1120;color:var(--text)
     }
-
     input::placeholder,textarea::placeholder{color:#75809a}
     textarea{min-height:120px;resize:vertical}
-
-    .files{
-      padding:12px;
-      border-radius:12px;
-      border:1px dashed #2a355a;
-      background:#0c1120;
-    }
-
-    .file-links a{
-      display:inline-block;
-      margin:6px 6px 0 0;
-      padding:6px 10px;
-      border-radius:8px;
-      border:1px solid #2a355a;
-      text-decoration:none;
-      color:#b7c3ff;
-      background:#0f1424;
-    }
-
+    .files{padding:12px;border-radius:12px;border:1px dashed #2a355a;background:#0c1120}
+    .file-links a{display:inline-block;margin:6px 6px 0 0;padding:6px 10px;border-radius:8px;border:1px solid #2a355a;text-decoration:none;color:#b7c3ff;background:#0f1424}
     .btn{
-      cursor:pointer;
-      border:none;
-      font-weight:700;
-      border-radius:12px;
-      padding:12px;
-      font-size:16px;
-      background:linear-gradient(90deg,var(--grad1),var(--grad2));
-      color:white;
-      box-shadow:0 8px 24px rgba(122,92,255,.35);
-      transition:transform .06s ease, filter .2s ease;
+      cursor:pointer;border:none;font-weight:700;border-radius:12px;padding:12px 18px;font-size:16px;
+      background:linear-gradient(90deg,var(--grad1),var(--grad2));color:white;
+      box-shadow:0 8px 24px rgba(122,92,255,.35);transition:opacity .2s
     }
-
-    .btn:hover{filter:brightness(1.08)}
-    .btn:active{transform:translateY(1px)}
-
-    .ok,.err{
-      display:none;
-      margin-top:12px;
-      padding:12px;
-      border-radius:10px;
-      text-align:center;
-      font-weight:500;
-      border:1px solid;
+    .btn:hover{opacity:.9}
+    .ok,.err{display:none;margin-top:12px;padding:12px;border-radius:10px;text-align:center;font-weight:500;border:1px solid}
+    .ok{background:rgba(24,160,88,.1);color:#7bffb2;border-color:rgba(24,160,88,.35)}
+    .err{background:rgba(220,76,70,.08);color:#ffb3ad;border-color:rgba(220,76,70,.35)}
+    .hp{position:absolute;left:-5000px}.small{color:#9aa3b2;font-size:12px}
+    progress{width:100%;height:8px}
+    .back-btn{
+      position:fixed;top:20px;left:20px;z-index:1000;
+      background:linear-gradient(90deg,var(--grad1),var(--grad2));color:#fff;
+      padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;
+      box-shadow:0 5px 20px rgba(122,92,255,.3);transition:opacity .2s;
     }
-
-    .ok{
-      background:rgba(24,160,88,.1);
-      color:#7bffb2;
-      border-color:rgba(24,160,88,.35);
-    }
-
-    .err{
-      background:rgba(220,76,70,.08);
-      color:#ffb3ad;
-      border-color:rgba(220,76,70,.35);
-    }
-
-    .logo{
-      display:block;
-      width:100px;
-      margin:0 auto 10px;
-      filter:drop-shadow(0 0 6px rgba(122,92,255,.5));
-    }
+    .back-btn:hover{opacity:.9}
   </style>
-
-  <!-- Bytescale -->
-  <script src="https://js.bytescale.com/upload-widget/v4"></script>
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    const BYTESCALE_PUBLIC_API_KEY = "public_kW2K8bQDj6TDrDE2FvM57zrdxNh2";
-    const EMAILJS_PUBLIC_KEY  = "bxu_LnkAPSP5X76Xh";
-    const EMAILJS_SERVICE_ID  = "service_studio3dconcept";
-    const EMAILJS_TEMPLATE_ID = "template_q6nnwi8";
-    document.addEventListener("DOMContentLoaded", () => emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }));
-  </script>
 </head>
 
 <body>
+  <a href="/index.html" class="back-btn">← Retour à l’accueil</a>
+
   <div class="wrap">
-    <img src="logo.png" alt="Studio 3D Concept" class="logo" />  <!-- ton logo -->
+    <img src="/assets/img/logo.png" alt="Studio 3D Concept" class="logo" />
     <h1>Demande de devis</h1>
 
     <div id="ok" class="ok">✅ Votre message a bien été envoyé. Merci !</div>
     <div id="err" class="err">❌ Une erreur est survenue. Merci de réessayer.</div>
 
-    <form id="form">
-      <div>
-        <label>Nom et prénom</label>
-        <input name="name" type="text" placeholder="Votre nom" required />
-      </div>
+    <form id="form" method="POST" action="/send.php">
+      <div class="hp"><label>Ne pas remplir</label><input name="website" type="text" /></div>
 
-      <div>
-        <label>Email</label>
-        <input name="email" type="email" placeholder="vous@exemple.fr" required />
-      </div>
-
-      <div>
-        <label>Téléphone (optionnel)</label>
-        <input name="phone" type="tel" placeholder="06..." />
-      </div>
-
-      <div>
-        <label>Message</label>
-        <textarea name="message" placeholder="Décrivez votre besoin..." required></textarea>
-      </div>
+      <div><label>Nom et prénom</label><input name="name" type="text" placeholder="Votre nom" required /></div>
+      <div><label>Email</label><input name="email" type="email" placeholder="vous@exemple.fr" required /></div>
+      <div><label>Téléphone (optionnel)</label><input name="phone" type="tel" placeholder="06..." /></div>
+      <div><label>Message</label><textarea name="message" placeholder="Décrivez votre besoin..." required></textarea></div>
 
       <div class="files">
-        <label>Fichiers (PDF, STL, ZIP, images...)</label><br />
+        <label>Fichiers (PDF, STL, STEP, ZIP, images...)</label><br />
+        <input type="file" id="files" multiple accept=".pdf,.zip,.stl,.step,.stp,.igs,.obj,.png,.jpg,.jpeg,.webp" style="display:none" />
         <button type="button" id="btnUpload" class="btn" style="width:auto;">Ajouter des fichiers</button>
+        <div id="progressWrap" style="margin-top:10px;display:none">
+          <progress id="pg" value="0" max="100"></progress>
+          <div id="pgTxt" class="small">0%</div>
+        </div>
         <div id="links" class="file-links"></div>
+        <div class="small">Les fichiers sont hébergés chez Bytescale. Le mail contient uniquement les liens.</div>
       </div>
 
+      <input type="hidden" name="file_urls" id="file_urls" />
       <button type="submit" class="btn">Envoyer</button>
     </form>
   </div>
 
   <script>
-    // ===== Bytescale upload =====
-    const uploader = window.UploadWidget;
+    const ACCOUNT_ID = "kW2K8bQ";
+    const PUBLIC_KEY = "public_kW2K8bQDj6TDrDE2FvM57zrdxNh2";
     const btn = document.getElementById("btnUpload");
-    const linksDiv = document.getElementById("links");
+    const input = document.getElementById("files");
+    const links = document.getElementById("links");
+    const hidden = document.getElementById("file_urls");
+    const pgWrap = document.getElementById("progressWrap");
+    const pg = document.getElementById("pg");
+    const pgTxt = document.getElementById("pgTxt");
     const uploaded = [];
 
-    const uploadOpts = {
-      apiKey: BYTESCALE_PUBLIC_API_KEY,
-      maxFileCount: 10,
-      maxFileSizeBytes: 300 * 1024 * 1024,
-      mimeTypes: [
-        "application/pdf",
-        "application/zip",
-        "model/stl",
-        "image/png",
-        "image/jpeg",
-        "image/webp"
-      ],
-      editor: { images: false }
-    };
+    function uploadOne(file){
+      return new Promise((resolve, reject) => {
+        const url = `https://api.bytescale.com/v2/accounts/${ACCOUNT_ID}/uploads/binary?fileName=${encodeURIComponent(file.name)}`;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Authorization", `Bearer ${PUBLIC_KEY}`);
+        xhr.upload.onprogress = e => {
+          if (!e.lengthComputable) return;
+          const p = Math.round((e.loaded/e.total)*100);
+          pg.value = p; pgTxt.textContent = p + "%";
+        };
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState !== 4) return;
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try { resolve(JSON.parse(xhr.responseText).fileUrl); }
+            catch(err){ reject(err); }
+          } else reject(new Error("Upload échoué ("+xhr.status+")"));
+        };
+        xhr.onerror = () => reject(new Error("Erreur réseau"));
+        xhr.send(file);
+      });
+    }
 
-    btn.addEventListener("click", async () => {
+    btn.addEventListener("click", () => input.click());
+    input.addEventListener("change", async () => {
+      if (!input.files || !input.files.length) return;
+      btn.disabled = true; pgWrap.style.display = "block"; pg.value = 0; pgTxt.textContent = "0%";
       try {
-        const { files } = await uploader.open(uploadOpts);
-        if (!files) return;
-        files.forEach(f => {
-          uploaded.push({ url: f.fileUrl, name: f.originalFileName });
+        for (const file of input.files) {
+          const url = await uploadOne(file);
+          uploaded.push(url);
           const a = document.createElement("a");
-          a.href = f.fileUrl;
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.textContent = f.originalFileName || "fichier";
-          linksDiv.appendChild(a);
-        });
+          a.href = url; a.target = "_blank"; a.rel = "noopener";
+          a.textContent = file.name;
+          links.appendChild(a);
+        }
+        hidden.value = uploaded.join("\n");
       } catch (e) {
         alert("Erreur upload : " + (e?.message || e));
-      }
-    });
-
-    // ===== EmailJS send =====
-    const form = document.getElementById("form");
-    const ok = document.getElementById("ok");
-    const err = document.getElementById("err");
-
-    form.addEventListener("submit", async (ev) => {
-      ev.preventDefault();
-      ok.style.display = "none";
-      err.style.display = "none";
-
-      const data = new FormData(form);
-      const params = {
-        name: data.get("name"),
-        email: data.get("email"),
-        phone: data.get("phone") || "",
-        message: data.get("message"),
-        file_urls: uploaded.map(f => f.url).join("\n"),
-        to_email: "devis@studio3dconcept.fr"
-      };
-
-      try {
-        const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-        if (res.status === 200) {
-          ok.style.display = "block";
-          form.reset();
-          uploaded.length = 0;
-          linksDiv.innerHTML = "";
-        } else throw new Error(res.status);
-      } catch (e) {
-        err.style.display = "block";
-        console.error(e);
+      } finally {
+        btn.disabled = false; input.value = "";
+        setTimeout(() => { pgWrap.style.display = "none"; }, 600);
       }
     });
   </script>
