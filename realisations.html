@@ -1,57 +1,127 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Réalisations – Studio 3D Concept</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réalisations – Studio 3D Concept</title>
 
-    <!-- CSS PRINCIPAL (IDENTIQUE AUX AUTRES PAGES) -->
-    <link rel="stylesheet" href="style.css">
+  <!-- CSS (chemin absolu + bust cache) -->
+  <link rel="stylesheet" href="/assets/css/app.css?v=3" />
+
+  <!-- Meta de base -->
+  <meta name="description" content="Galerie des réalisations de Studio 3D Concept : prototypes, petites séries, ajustements et réparations." />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
 </head>
 
 <body>
-
-<header class="header">
-    <div class="logo">
-        <img src="assets/img/logo.png" alt="Studio 3D Concept">
-        <span>STUDIO 3D CONCEPT</span>
+  <!-- HEADER (mêmes classes que tes autres pages) -->
+  <header class="hdr">
+    <div class="container topbar">
+      <img src="/assets/img/logo.png" alt="Studio 3D Concept" class="logo" />
+      <div>
+        <div class="brand">STUDIO 3D CONCEPT</div>
+        <div class="tag">Du concept à la réalité, en 3D</div>
+      </div>
     </div>
-
-    <nav class="nav">
-        <a href="index.html">Accueil</a>
-        <a href="services.html">Services</a>
-        <a href="realisations.html" class="active">Réalisations</a>
-        <a href="contact.html">Contact</a>
+    <nav class="container nav">
+      <a href="./index.html">Accueil</a>
+      <a href="./services.html">Services</a>
+      <a href="./realisations.html" aria-current="page">Réalisations</a>
+      <a href="./contact.html">Devis & Contact</a>
     </nav>
-</header>
+  </header>
 
-<section class="container">
-    <h1>Réalisations</h1>
-    <p class="subtitle">Quelques exemples de pièces et projets réalisés en impression 3D.</p>
+  <main class="container">
+    <section class="card">
+      <h2>Galerie</h2>
+      <p class="lead">Aperçu de quelques pièces réalisées. D’autres exemples sur demande.</p>
 
-    <div class="cards">
+      <!-- Galerie auto -->
+      <div id="gallery" class="gallery-grid"></div>
+    </section>
+  </main>
 
-        <div class="card">
-            <img src="assets/img/gallery2.jpg" alt="Poste de travail impression 3D">
-            <h3>Poste de travail impression 3D</h3>
-            <p>Aménagement et organisation d’un poste d’impression 3D.</p>
-        </div>
-
-        <div class="card">
-            <img src="assets/img/logo1.jpg" alt="Support imprimé sur mesure">
-            <h3>Support imprimé sur mesure</h3>
-            <p>Support technique conçu et imprimé sur mesure.</p>
-        </div>
-
+  <footer class="foot">
+    <div class="container">
+      © <span id="year"></span> Studio 3D Concept — Tous droits réservés.
     </div>
-</section>
+  </footer>
 
-<footer class="footer">
-    <p>
-        © 2025 Studio 3D Concept —
-        <a href="mentions-legales.html">Mentions légales</a>
-    </p>
-</footer>
+  <!-- Styles locaux (légers) : respectent ton thème -->
+  <style>
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:18px;
+    }
+    .gallery-item{
+      background:#0f1422;
+      border:1px solid #1f2b45;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .gallery-item img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+    }
+    .gallery-item figcaption{
+      padding:10px 12px;
+      color:#aeb7c6;
+      font-size:14px;
+      border-top:1px solid #1f2b45;
+    }
+    @media (max-width:600px){
+      .gallery-item img{height:200px}
+    }
+  </style>
 
+  <!-- JS : année + génération de la galerie depuis /assets/data/realisations.json -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    (async () => {
+      const wrap = document.getElementById('gallery');
+      if (!wrap) return;
+
+      // Charge la liste d'images
+      let items = [];
+      try {
+        const res = await fetch('/assets/data/realisations.json', { cache: 'no-store' });
+        items = await res.json();
+      } catch (e) {
+        console.warn('realisations.json introuvable ou invalide', e);
+        return;
+      }
+
+      if (!Array.isArray(items) || !items.length) return;
+
+      // util pour vérifier qu'une image charge (sinon on skip)
+      const canLoad = (src) => new Promise((ok, ko) => {
+        const im = new Image();
+        im.onload = () => ok(true);
+        im.onerror = () => ko(false);
+        im.src = src;
+      });
+
+      for (const it of items) {
+        const src = it.src;
+        const alt = it.alt || '';
+        try {
+          await canLoad(src);
+          const fig = document.createElement('figure');
+          fig.className = 'gallery-item';
+          fig.innerHTML = `
+            <img src="${src}" alt="${alt}" loading="lazy">
+            <figcaption>${alt}</figcaption>
+          `;
+          wrap.appendChild(fig);
+        } catch {
+          // image KO → ignorée (pas de bloc vide)
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
