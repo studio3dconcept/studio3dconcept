@@ -1,146 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Réalisations – Studio 3D Concept</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #0b0e14;
-      color: #eaeaea;
-    }
+  <!-- CSS EXISTANT -->
+  <link rel="stylesheet" href="/assets/css/app.css" />
 
-    /* HEADER */
-    header {
-      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-      padding: 20px 30px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    header img {
-      height: 45px;
-    }
-
-    header .title {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    nav {
-      margin-left: auto;
-    }
-
-    nav a {
-      color: #eaeaea;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
-    }
-
-    nav a:hover {
-      color: #4fc3f7;
-    }
-
-    /* MAIN */
-    main {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #b0bec5;
-    }
-
-    /* GALERIE */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-
-    .gallery figure {
-      background-color: #121826;
-      border-radius: 12px;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      display: block;
-    }
-
-    figcaption {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #b0bec5;
-    }
-
-    /* FOOTER */
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #9aa4ad;
-      border-top: 1px solid #1f2933;
-    }
-
-    footer a {
-      color: #4fc3f7;
-      text-decoration: none;
-    }
-  </style>
+  <meta name="description" content="Galerie des réalisations de Studio 3D Concept" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
 </head>
 
 <body>
 
-<header>
-  <img src="Actifs/logo.png" alt="Studio 3D Concept">
-  <div class="title">STUDIO 3D CONCEPT</div>
+<header class="hdr">
+  <div class="container topbar">
+    <img src="/assets/img/logo.png" alt="Studio 3D Concept" class="logo" />
+    <div>
+      <div class="brand">STUDIO 3D CONCEPT</div>
+      <div class="tag">Du concept à la réalité, en 3D</div>
+    </div>
+  </div>
 
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="services.html">Services</a>
-    <a href="realisations.html">Réalisations</a>
-    <a href="contact.html">Contact</a>
+  <nav class="container nav">
+    <a href="./index.html">Accueil</a>
+    <a href="./services.html">Services</a>
+    <a href="./realisations.html" aria-current="page">Réalisations</a>
+    <a href="./contact.html">Devis & Contact</a>
   </nav>
 </header>
 
-<main>
-  <h1>Réalisations</h1>
-  <p>Aperçu de quelques pièces conçues et imprimées en 3D.</p>
+<main class="container">
+  <section class="card">
+    <h1>Réalisations</h1>
+    <p class="lead">Aperçu de quelques pièces réalisées.</p>
 
-  <div class="gallery">
-    <figure>
-      <img src="Actifs/gallery2.jpg" alt="Poste de travail impression 3D">
-      <figcaption>Poste de travail – impression 3D</figcaption>
-    </figure>
+    <div class="gallery-grid">
 
-    <figure>
-      <img src="Actifs/logo1.jpg" alt="Support imprimé sur mesure">
-      <figcaption>Support imprimé sur mesure</figcaption>
-    </figure>
-  </div>
+      <figure class="gallery-item">
+        <img src="/assets/img/gallery2.jpg" alt="Poste de travail impression 3D">
+        <figcaption>Poste de travail – impression 3D</figcaption>
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="/assets/img/logo1.jpg" alt="Support imprimé sur mesure">
+        <figcaption>Support imprimé sur mesure</figcaption>
+      </figure>
+
+    </div>
+  </section>
 </main>
 
-<footer>
-  © 2025 Studio 3D Concept —
-  <a href="mentions-legales.html">Mentions légales</a>
+<footer class="foot">
+  <div class="container">
+    © <span id="year"></span> Studio 3D Concept — Tous droits réservés.
+  </div>
 </footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
